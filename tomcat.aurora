@@ -1,0 +1,19 @@
+hello = Process(
+  name = 'hello',
+  cmdline = '/opt/tomcat/bin/catalina.sh run'
+)
+
+task = SequentialTask(
+  processes = [hello],
+  resources = Resources(cpu = 1.0, ram = 128*MB, disk = 128*MB)
+)
+
+jobs = [
+  Service(
+    task = task,
+    cluster = 'devcluster',
+    role = 'root',
+    environment = 'devel',
+    name = 'hello'
+  )
+]

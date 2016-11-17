@@ -50,3 +50,8 @@ Configuration aurora
 ```
 vi /etc/aurora/clusters.json
 ```
+
+Run tomcat aurora 
+```
+aurora job create devcluster/root/devel/hello tomcat.aurora
+```
