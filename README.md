@@ -50,7 +50,11 @@ aurora job create devcluster/root/devel/hello_world hello_world.aurora
 ```
 vi /etc/aurora/clusters.json
 ```
-
+# /etc/sysconfig/aurora-scheduler
+```
+-mesos_master_address='172.17.0.2:5050'
+-receive_revocable_resources=true
+```
 Run tomcat aurora 
 ```
 aurora job create devcluster/root/devel/hello tomcat.aurora
