@@ -1,0 +1,27 @@
+hello_loop = Process(
+  name = 'hello',
+  cmdline = """
+     source /etc/profile
+     echo "ENV1=$ENV1"
+     echo "ENV2=$ENV2"
+     while true; do
+         sleep 10
+     done
+  """)
+
+task = Task(
+  processes = [hello_loop],
+  resources = Resources(cpu=1, ram=1*MB, disk=8*MB)
+)
+
+jobs = [
+  Service(
+    cluster = 'devcluster',
+    environment = 'devel',
+    role = 'root',
+    name = 'hello_docker_image',
+    task = task,
+    container = Mesos(image=DockerImage(name='jackyoh/centos', tag='7.2'))
+  )
+]
+
